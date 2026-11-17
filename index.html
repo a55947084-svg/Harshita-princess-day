@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#713b4a">
+<title>Harshita's Princess Storybook ♡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap');
+:root{--cream:#fbf4ef;--paper:#fffaf6;--rose:#d98e9c;--pink:#edc2c5;--wine:#814b5b;--muted:#a78a88;--line:#ecd9d4;--sage:#bac7b1;--blue:#c1d1d5;--lilac:#d5c5dd;--gold:#e7d1a5}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:#765e60;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #d98e9c;outline-offset:4px}
+.scene{min-height:100svh;display:none;align-items:center;justify-content:center;padding:28px 18px;position:relative;overflow:hidden;isolation:isolate}
+.scene.active{display:flex;animation:sceneIn .8s ease both}
+@keyframes sceneIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.scene:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.16;background-image:radial-gradient(#b58b81 .55px,transparent .7px);background-size:8px 8px}
+.inner{width:min(100%,720px);text-align:center;position:relative;z-index:2}
+.eyebrow{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#b08b8e}
+h1,h2{font-family:'Playfair Display',serif;font-weight:500;color:var(--wine);line-height:1.1;margin:13px 0}
+h1{font-size:clamp(45px,11vw,78px)}h2{font-size:clamp(33px,8vw,53px)}
+.italic{font-style:italic}.sub{font:italic 22px/1.4 'Cormorant Garamond',serif;color:#a8898b}
+.tiny{font-size:11px;line-height:1.8;color:#aa9290}
+.btn{border:1px solid #e4c6c6;background:#fffaf7;color:#89596a;border-radius:99px;padding:13px 21px;font-size:10px;letter-spacing:.13em;text-transform:uppercase;box-shadow:0 7px 22px #93636b12;transition:.25s}
+.btn:hover{transform:translateY(-2px);background:#fff0f1}
+.btn.secondary{background:transparent;box-shadow:none}
+.actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:22px}
+.floaty{position:absolute;z-index:0;color:#d89ba5;opacity:.65;pointer-events:none;animation:drift 5s ease-in-out infinite}
+@keyframes drift{50%{transform:translateY(-14px) rotate(10deg)}}
+.cover-scene{background:linear-gradient(145deg,#f3dfe0,#f9eee8 60%,#e8e4e8)}
+.cover{width:min(100%,370px);min-height:500px;background:#fffaf5;border:1px solid #e8d3cc;box-shadow:0 25px 65px #78515b22;position:relative;padding:35px 25px 28px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;overflow:hidden}
+.cover:before{content:"";position:absolute;inset:11px;border:1px solid #e7c9c4;pointer-events:none}
+.cover:after{content:"";position:absolute;left:25px;top:0;bottom:0;width:10px;background:linear-gradient(90deg,#e4c5bd,#fff5ef,#ead2cb);opacity:.7}
+.cover-top,.cover-bottom{position:relative;z-index:1}
+.cover-title{font:500 clamp(37px,9vw,52px)/1.05 'Playfair Display',serif;color:#854d60;margin:14px 0}
+.cover-art{width:180px;height:180px;border-radius:50%;background:#f8e8e6;display:grid;place-items:center;position:relative;box-shadow:inset 0 0 0 1px #e9c9c8,0 12px 25px #aa758010}
+.cover-art .heart{font-size:82px;color:#d98b9c;filter:drop-shadow(0 5px 7px #bc758322);animation:heartbeat 2s infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.1)}30%{transform:scale(1)}45%{transform:scale(1.06)}}
+.book-open{perspective:1200px;width:min(100%,620px);height:380px;margin:28px auto 15px;position:relative}
+.book-pages{position:absolute;inset:0;background:#fffaf4;border:1px solid #e7d2c9;border-radius:5px 13px 13px 5px;box-shadow:0 18px 45px #79575a18;display:grid;place-items:center;padding:26px}
+.book-pages:after{content:"";position:absolute;top:10px;bottom:10px;right:10px;width:5px;background:repeating-linear-gradient(0deg,#e8d7ce 0 2px,#fffaf4 2px 5px)}
+.book-left{position:absolute;inset:0;background:#f3e1dc;border:1px solid #dfc1bd;transform-origin:left center;transform:rotateY(0);transition:transform 1.35s cubic-bezier(.2,.7,.2,1);z-index:3;display:flex;align-items:center;justify-content:center;flex-direction:column;backface-visibility:hidden;box-shadow:inset -9px 0 15px #9b69701c}
+.book-left:before{content:"";position:absolute;inset:12px;border:1px solid #d6b2b1}
+.book-left .mini{font-size:65px;color:#bd7889;position:relative}
+.book-open.open .book-left{transform:rotateY(-155deg)}
+.book-inside{max-width:420px;position:relative;z-index:1}
+.page-number{position:absolute;bottom:14px;right:25px;font:italic 14px 'Cormorant Garamond',serif;color:#b79b94}
+.sparkle{color:#d99daa;letter-spacing:12px;font-size:16px;margin:13px}
+.balloon-stage{height:260px;max-width:540px;margin:20px auto 4px;position:relative;display:flex;justify-content:center;align-items:flex-start;gap:12px;flex-wrap:wrap;padding:8px 5px}
+.balloon{width:66px;height:86px;border:0;border-radius:52% 52% 48% 48%;position:relative;box-shadow:inset -9px -7px 12px #74505012,inset 8px 6px 10px #fff8;animation:balloonFloat 3.5s ease-in-out infinite;display:grid;place-items:center;color:#fff;font:italic 13px 'Cormorant Garamond',serif;text-shadow:0 1px 3px #79525a33;transition:opacity .2s}
+.balloon:before{content:"";position:absolute;width:8px;height:8px;bottom:-5px;left:calc(50% - 4px);background:inherit;transform:rotate(45deg)}
+.balloon:after{content:"";position:absolute;top:89px;left:50%;height:55px;border-left:1px solid #c8aaa7}
+.balloon:nth-child(5n+1){background:#e4a8b3}.balloon:nth-child(5n+2){background:#b9ccd0;animation-delay:.4s}.balloon:nth-child(5n+3){background:#d8c5df;animation-delay:.8s}.balloon:nth-child(5n+4){background:#e9d6aa;animation-delay:1.2s}.balloon:nth-child(5n){background:#b9c8ad;animation-delay:1.6s}
+.balloon span{opacity:0;transform:scale(.4);transition:.35s}
+.balloon.reveal span{opacity:1;transform:scale(1)}
+.balloon.popped{animation:balloonPop .42s ease forwards}
+@keyframes balloonFloat{50%{transform:translateY(-10px) rotate(3deg)}}
+@keyframes balloonPop{0%{transform:scale(1);opacity:1}55%{transform:scale(1.35);opacity:.9}100%{transform:scale(.05);opacity:0}}
+.note-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;max-width:530px;margin:20px auto}
+.note{min-height:68px;background:#fff;border:1px solid #efdfdc;padding:13px 10px;display:grid;place-items:center;font:italic 18px/1.2 'Cormorant Garamond',serif;color:#8a6c70;box-shadow:0 6px 18px #9a70700b;transition:.3s}
+.note.show{animation:notePop .5s ease}
+@keyframes notePop{from{transform:scale(.8) rotate(-3deg);opacity:0}to{transform:scale(1);opacity:1}}
+.confetti{position:fixed;z-index:10;pointer-events:none;top:-25px;font-size:18px;animation:fall 2.8s linear forwards}
+@keyframes fall{to{transform:translate(var(--drift),110vh) rotate(620deg);opacity:0}}
+.cake{font-size:90px;display:inline-block;filter:drop-shadow(0 8px 9px #a96d7718);animation:cakeBob 2.6s ease-in-out infinite}
+@keyframes cakeBob{50%{transform:translateY(-8px) rotate(2deg)}}
+.tree{height:280px;max-width:420px;margin:10px auto;position:relative}
+.trunk{position:absolute;bottom:10px;left:50%;width:6px;height:0;background:#9d7d73;border-radius:8px;transform:translateX(-50%);transition:height 1.5s ease}
+.tree.grow .trunk{height:135px}
+.branch{position:absolute;left:50%;bottom:100px;width:0;height:3px;background:#9d7d73;transform-origin:left;border-radius:8px;transition:width .9s ease .7s}
+.branch.l{transform:rotate(-42deg)}.branch.r{transform:rotate(42deg)}.tree.grow .branch{width:84px}
+.tree-leaf{position:absolute;opacity:0;transform:scale(.2);transition:.6s;font-size:22px}
+.tree.grow .tree-leaf{opacity:1;transform:scale(1)}
+.envelope{width:240px;height:155px;margin:25px auto;position:relative;cursor:pointer;perspective:800px;filter:drop-shadow(0 12px 18px #79545b20)}
+.env-back{position:absolute;inset:0;background:#f0d9d2}
+.env-flap{position:absolute;inset:0;background:#e7c2c2;clip-path:polygon(0 0,100% 0,50% 63%);transform-origin:top;transition:transform .85s;z-index:4}
+.env-front{position:absolute;inset:0;background:#f2dcd5;clip-path:polygon(0 100%,0 0,50% 60%,100% 0,100% 100%);z-index:3}
+.env-seal{position:absolute;top:55%;left:50%;transform:translate(-50%,-50%);font-size:30px;color:#b96e83;z-index:5}
+.envelope.open .env-flap{transform:rotateX(180deg)}
+.letter{display:none;max-width:500px;margin:12px auto;background:#fffdf9;border:1px solid #edddda;padding:24px;text-align:left;font:20px/1.55 'Cormorant Garamond',serif;box-shadow:0 15px 40px #79545b12}
+.letter.show{display:block;animation:letterIn .8s ease}
+@keyframes letterIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+.memory-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:26px auto}
+.memory{width:125px;padding:9px 9px 13px;background:#fff;border:1px solid #ecddda;box-shadow:0 8px 20px #8f656510;transform:rotate(-3deg)}
+.memory:nth-child(2){transform:rotate(3deg) translateY(12px)}.memory:nth-child(3){transform:rotate(-1deg)}
+.memory-art{height:112px;display:grid;place-items:center;background:linear-gradient(145deg,#f7e8e7,#f3eee8 60%,#e3ece8);font-size:42px}
+.memory p{font:italic 16px 'Cormorant Garamond',serif;margin:9px 0 0}
+footer{text-align:center;padding:18px;color:#b49b9d;font-size:9px;letter-spacing:.2em}
+@media(max-width:480px){.cover{min-height:470px}.book-open{height:410px}.book-pages{padding:18px}.balloon{width:56px;height:75px}.balloon-stage{height:245px;gap:8px}.note{font-size:16px}.memory{width:105px}.memory-art{height:100px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+.name-ribbon{position:relative;z-index:5;margin:0 auto 16px;width:max-content;max-width:95%;padding:8px 15px;border:1px solid #ecd4d3;border-radius:99px;background:#fffaf7cc;box-shadow:0 5px 18px #9b68740d;color:#a66c7b;font:italic 14px 'Cormorant Garamond',serif;letter-spacing:.16em}
+.name-ribbon .letters{display:inline-flex;gap:4px;margin-left:6px;font:600 14px 'Cormorant Garamond',serif;letter-spacing:.16em;color:#b96f83}
+.name-ribbon .letters span{display:inline-block;opacity:0}
+.name-ribbon.play .letters span{animation:letterAppear .48s ease both;animation-delay:calc(var(--i)*.28s)}
+@keyframes letterAppear{from{opacity:0}to{opacity:1}}
+.final-name{display:inline-flex;justify-content:center;gap:clamp(3px,1.2vw,10px);font:600 clamp(27px,7vw,48px) 'Cormorant Garamond',serif;letter-spacing:.08em;color:#ffe1ae;text-shadow:0 1px 2px #50303a}
+.final-name span{display:inline-block;opacity:0}
+.final-name.play span{animation:letterAppear .5s ease both;animation-delay:calc(var(--i)*.3s)}
+.signature{margin:15px auto 0;color:#ad8a8d;font:italic 15px 'Cormorant Garamond',serif;letter-spacing:.08em}
+.signature b{color:#9c6171;font-weight:500}
+
+
+/* extra celebration chapters */
+.big-name-title{font:600 clamp(34px,9vw,66px)/1.05 'Cormorant Garamond',serif;letter-spacing:.13em;color:#ffe1ae;text-shadow:0 1px 2px #50303a;margin:12px auto 18px;display:flex;justify-content:center;gap:clamp(2px,1.1vw,9px);white-space:nowrap}
+.big-name-title span{opacity:0;display:inline-block}
+.scene.active .big-name-title span{animation:letterAppear .55s ease both;animation-delay:calc(var(--i)*.24s)}
+.extra-card{max-width:540px;margin:18px auto;padding:22px 18px;background:#fffaf7;border:1px solid #ecd9d4;box-shadow:0 14px 35px #8c62620d;border-radius:4px}
+.flower-garden{display:flex;justify-content:center;gap:clamp(12px,4vw,28px);flex-wrap:wrap;margin:20px auto;max-width:520px}
+.flower{border:1px solid #efdfdc;background:#fff;border-radius:50%;width:78px;height:78px;font-size:34px;box-shadow:0 7px 18px #9a707012;transition:transform .5s}
+.flower.bloom{transform:rotate(18deg) scale(1.2);background:#fff0f2}
+.crown-wrap{font-size:86px;margin:18px auto;filter:drop-shadow(0 8px 12px #c99b6c22);animation:crownFloat 2.8s ease-in-out infinite}
+@keyframes crownFloat{50%{transform:translateY(-12px) rotate(3deg)}}
+.candle-row{display:flex;justify-content:center;gap:15px;margin:20px auto}
+.candle{font-size:54px;border:0;background:transparent;transition:transform .3s}
+.candle.off{filter:grayscale(1);transform:translateY(7px) scale(.92)}
+.firework-zone{height:190px;max-width:500px;margin:15px auto;display:grid;place-items:center;position:relative;background:radial-gradient(circle,#fff 0,#fff8f6 65%,#f7e9e7 100%);border:1px solid #efdfdc;overflow:hidden}
+.firework{position:absolute;font-size:27px;animation:fireworkPop 1.4s ease-out forwards}
+@keyframes fireworkPop{0%{transform:scale(.1) rotate(0);opacity:0}35%{transform:scale(1.5) rotate(45deg);opacity:1}100%{transform:scale(.7) translateY(-30px);opacity:0}}
+
+
+/* Floating music control — stays visible on every chapter */
+.music-control{position:fixed;top:14px;right:14px;z-index:99999;display:flex;align-items:center;gap:8px;padding:11px 16px;border:1px solid #e7c6cc;border-radius:999px;background:rgba(255,250,247,.96);color:#875768;box-shadow:0 7px 24px #815b641c;font:600 11px 'DM Sans',sans-serif;letter-spacing:.06em;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .2s,background .2s}
+.music-control:active{transform:scale(.97)}
+.music-control .music-icon{font-size:16px;line-height:1}
+.music-control.playing{background:#f9e8e9;border-color:#dcaeb8}
+.music-control .music-state{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#b07b89}
+#youtubeMusicFrame{position:fixed;width:1px;height:1px;left:-10px;bottom:-10px;opacity:.001;pointer-events:none;border:0}
+@media(max-width:420px){.music-control{top:10px;right:10px;padding:10px 12px;font-size:10px}.music-control .music-state{display:none}}
+
+
+/* Soft voice-note invitation on the final chapters */
+.voice-note-card{width:min(100%,390px);margin:18px auto 8px;padding:15px 18px 14px;border:1px solid #e8cbd0;border-radius:20px;background:rgba(255,250,247,.94);box-shadow:0 8px 24px #815b6412;text-align:center}
+.voice-note-link{display:inline-block;color:#89596a;text-decoration:none;font:500 22px/1.25 'Cormorant Garamond',serif;font-style:italic;padding:2px 5px 5px}
+.voice-note-link:focus-visible{outline:2px solid #d98e9c;outline-offset:4px;border-radius:8px}
+.voice-note-copy{margin:3px 0 0;font:9px/1.6 'DM Sans',sans-serif;letter-spacing:.025em;color:#a17f83}
+
+
+/* Cinematic arrow -> heart burst -> title -> growing heart tree intro */
+#princessIntro{position:fixed;inset:0;z-index:100000;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;opacity:1;transition:opacity .9s ease}
+#princessIntro.hide{opacity:0;pointer-events:none}
+#princessIntro .intro-scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;background:#fff}
+#princessIntro .heart-icon{font-size:clamp(150px,30vw,290px);color:#f00072;line-height:1;text-shadow:0 10px 0 #bd005b,0 18px 30px #b4005a30;position:absolute;top:28%;left:50%;transform:translate(-50%,-50%);filter:drop-shadow(0 4px 5px #8e004733)}
+#princessIntro .bow{position:absolute;left:calc(50% - 240px);top:52%;font-size:clamp(70px,12vw,115px);transform:rotate(-4deg);opacity:0}
+#princessIntro.started .bow{animation:bowArrow 1.05s cubic-bezier(.2,.7,.25,1) .2s forwards}
+#princessIntro.started .heart-icon{animation:heartThrob .7s ease-in-out 2}
+#princessIntro.burst .heart-icon{animation:heartExplode .65s ease-out forwards}
+#princessIntro .tiny-heart{position:absolute;top:28%;left:50%;font-size:clamp(13px,2vw,24px);color:#ed1680;opacity:0}
+#princessIntro.burst .tiny-heart{animation:scatterHeart 1.1s ease-out forwards}
+@keyframes bowArrow{0%{left:calc(50% - 260px);opacity:0;transform:rotate(-4deg) scale(.8)}15%{opacity:1}80%{left:calc(50% - 45px);opacity:1}100%{left:calc(50% - 25px);opacity:0;transform:rotate(-4deg) scale(1.1)}}
+@keyframes heartThrob{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.09)}}
+@keyframes heartExplode{0%{transform:translate(-50%,-50%) scale(1)}45%{transform:translate(-50%,-50%) scale(1.38)}100%{transform:translate(-50%,-50%) scale(.05);opacity:0}}
+@keyframes scatterHeart{0%{opacity:1;transform:translate(0,0) scale(.5)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(1.1)}}
+#princessIntro .title-scene{background:linear-gradient(115deg,#f50079,#c90043);color:#fff;opacity:0;z-index:2;text-align:center}
+#princessIntro.title-on .title-scene{animation:titleFade 1s ease forwards}
+#princessIntro .make-wish{font:italic 18px Georgia,serif;letter-spacing:.04em;margin-bottom:28px}
+#princessIntro .princess-title{font:700 clamp(58px,10vw,130px)/.88 Georgia,serif;letter-spacing:-.055em;text-shadow:0 4px 0 #9e174b;max-width:900px}
+#princessIntro .title-rule{width:180px;height:2px;background:#fff;margin:28px auto 22px;transform:rotate(-3deg)}
+#princessIntro .for-name{font:italic 22px Georgia,serif;color:#fff0cf;text-shadow:0 1px 3px #59333f}
+@keyframes titleFade{to{opacity:1}}
+#princessIntro .tree-scene{background:#fff;opacity:0;z-index:3}
+#princessIntro.tree-on .tree-scene{animation:titleFade .8s ease forwards}
+#princessIntro .heart-tree{width:min(78vw,580px);height:min(78vh,650px);overflow:visible}
+#princessIntro .tree-trunk{stroke:#bd1762;stroke-width:13;stroke-linecap:round;stroke-dasharray:500;stroke-dashoffset:500}
+#princessIntro.tree-on .tree-trunk{animation:drawTree 1.8s ease-out forwards}
+#princessIntro .tree-branch{stroke:#bd1762;stroke-width:7;stroke-linecap:round;stroke-dasharray:180;stroke-dashoffset:180}
+#princessIntro.tree-on .tree-branch{animation:drawTree 1.25s ease-out forwards}
+#princessIntro .leaf{opacity:0;transform-box:fill-box;transform-origin:center}
+#princessIntro.tree-on .leaf{animation:leafPop .45s cubic-bezier(.2,.8,.3,1) forwards}
+@keyframes drawTree{to{stroke-dashoffset:0}}
+@keyframes leafPop{0%{opacity:0;transform:scale(.05) rotate(-25deg)}80%{opacity:1;transform:scale(1.18) rotate(5deg)}100%{opacity:1;transform:scale(1)}}
+#princessIntro .begin-btn{position:absolute;bottom:9%;z-index:8;border:1px solid #e4a8bd;border-radius:999px;background:#fff7f8;color:#a82a63;padding:13px 26px;font:600 12px 'DM Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 8px 25px #8c275022}
+#princessIntro.started .begin-btn{display:none}
+@media(max-width:600px){#princessIntro .bow{left:calc(50% - 170px)}#princessIntro .princess-title{font-size:clamp(52px,13vw,82px)}}
+
+
+
+/* THEME ONLY: deeper berry-red, dusty rose, muted green and warm paper palette */
+:root{--cream:#713b4a;--paper:#f8eee8;--rose:#c86f7d;--pink:#e7a0a8;--wine:#713b4a;--muted:#c7a5a0;--line:#a66c72;--sage:#8fa68a;--blue:#8daeb0;--lilac:#b29bb8;--gold:#d7b66c}
+body{background:#713b4a;color:#f4e5df}
+.scene{background-color:#87535d}
+.scene:before{opacity:.12;background-image:radial-gradient(#f1c8c2 .55px,transparent .7px)}
+.cover-scene{background:linear-gradient(145deg,#87535d 0%,#a5656d 52%,#71836b 100%)}
+.cover{background:linear-gradient(155deg,#f8eee8,#f1ded7);border-color:#bd7b7c;box-shadow:0 25px 65px #32182170}
+.cover:before{border-color:#c98c8b}.cover:after{background:linear-gradient(90deg,#9b5961,#f1d5cb,#8a5b60)}
+.cover-title{color:#713b4a}
+.cover-art{background:linear-gradient(145deg,#e8b8b4,#d8c2a2);box-shadow:inset 0 0 0 1px #b8757d,0 12px 25px #4c293533}
+.cover-art .heart{color:#a93650}
+.eyebrow{color:#f1d6c9}
+h1,h2{color:#fff0e5}
+.sub{color:#f0d8cf}.tiny{color:#f3e1d7}
+.btn{border-color:#bd7b80;background:#f5e8df;color:#713b4a;box-shadow:0 7px 22px #32182145}
+.btn:hover{background:#e9c2bd}
+.name-ribbon{background:#f5e8dfeb;border-color:#bd8583;color:#804652}
+.name-ribbon .letters{color:#873247;font-weight:700}
+.signature{color:#f0d8cf}.signature b{color:#ffe4a8;font-weight:700;text-shadow:0 1px 2px #55313b66}
+.cover .signature{color:#80545a}.cover .signature b{color:#7c3549;text-shadow:none;font-weight:700}
+.book-pages{background:#f7eee6;border-color:#bd8981;box-shadow:0 18px 45px #32182170}
+.book-pages:after{background:repeating-linear-gradient(0deg,#d8b9ae 0 2px,#f7eee6 2px 5px)}
+.book-left{background:linear-gradient(145deg,#e8c9c0,#d8b8aa);border-color:#b57b79}
+.book-left:before{border-color:#b57b79}.book-left .mini{color:#9f4058}
+.page-number{color:#70434b;font-weight:600}
+.note{background:#f4e9df;border-color:#cda5a0;color:#633943;font-weight:600}
+.note:nth-child(4n+2){background:#e0e9dc}.note:nth-child(4n+3){background:#eadde9}.note:nth-child(4n){background:#f0dfc2}
+.extra-card{background:#f6ece4;border-color:#b98182;box-shadow:0 14px 35px #32182155;color:#70434b}
+.flower{background:#f4e8df;border-color:#bd8583;color:#9b4056}.flower.bloom{background:#e2ebdc}
+.firework-zone{background:radial-gradient(circle,#f6e9df 0,#ead8d2 65%,#c99ba0 100%);border-color:#b98182}
+.memory{background:#f5e9e0;border-color:#c69a91;box-shadow:0 8px 20px #32182155}
+.memory-art{background:linear-gradient(145deg,#e8c8c1,#dce6d8 60%,#e8d7b9)}
+footer{color:#dfbdb4}
+.music-control{border-color:#b9787d;background:rgba(247,235,226,.97);color:#713b4a;box-shadow:0 7px 24px #32182170}
+.music-control.playing{background:#e9c8c4;border-color:#a74d5c}.music-control .music-state{color:#9d4a5a}
+.voice-note-card{background:rgba(247,237,228,.97);border-color:#bd8583;box-shadow:0 8px 24px #32182155}
+.voice-note-link{color:#713b4a;font-weight:700}.voice-note-copy{color:#704c50}
+#princessIntro{background:radial-gradient(circle at 50% 42%,#b8757b 0%,#87535d 62%,#57404a 100%)}
+#princessIntro .intro-scene{background:transparent}
+#princessIntro .heart-scene{background:radial-gradient(circle at 50% 42%,#bd7b80 0%,#87535d 62%,#57404a 100%)}
+#princessIntro .heart-icon{color:#f09a9e;text-shadow:0 10px 0 #9e344b,0 18px 30px #24101d80;filter:drop-shadow(0 4px 8px #2b142c88)}
+#princessIntro .tiny-heart{color:#f6c4a8}
+#princessIntro .title-scene{background:linear-gradient(115deg,#b85c6a,#87535d 58%,#65795f);color:#fff4e9}
+#princessIntro .princess-title{text-shadow:0 4px 0 #69404b}
+#princessIntro .title-rule{background:#ffe0a8}
+#princessIntro .make-wish{color:#fff0dc}
+#princessIntro .tree-scene{background:radial-gradient(circle at 50% 40%,#a87378 0%,#70515c 75%,#51434c 100%)}
+#princessIntro .tree-trunk,#princessIntro .tree-branch{stroke:#9fbd91}
+#princessIntro .heart-tree g:nth-of-type(1) .leaf{fill:#e98d9b!important}
+#princessIntro .heart-tree g:nth-of-type(2) .leaf{fill:#9fbd91!important}
+#princessIntro .heart-tree g:nth-of-type(3) .leaf{fill:#e7c276!important}
+#princessIntro .begin-btn{border-color:#e0a3a1;background:#f5e8df;color:#713b4a;box-shadow:0 8px 25px #2c152d66}
+@media(max-width:600px){.cover-scene{background:linear-gradient(155deg,#87535d,#a5656d 65%,#71836b)}}
+
+
+/* READABILITY FIX: keep every text block high-contrast on its own surface */
+:root{--ink:#59313b;--ink-soft:#70434b;--name-rose:#a52f50;--name-gold:#f1cf86}
+body{color:#f8e9e2}
+.scene .inner>p:not(.sub):not(.tiny), .scene .inner .letter p{color:#59313b}
+.book-pages,.book-left{color:#59313b}
+.book-inside h1,.book-inside h2,.book-inside h2 i{color:#713447!important;text-shadow:none}
+.book-inside .eyebrow{color:#8a4b56!important;font-weight:700}
+.book-inside .sub,.book-inside p{color:#65434a!important;text-shadow:none}
+.book-inside .sparkle{color:#a83f5b}
+.book-inside .btn{color:#713447;background:#fff8f0;border-color:#b86f78}
+.book-left .eyebrow{color:#74424c!important}
+.book-left .tiny{color:#69444a!important}
+.page-number{color:#693b45!important}
+.name-ribbon{color:#71404a!important}
+.name-ribbon .letters{color:#a52f50!important;text-shadow:none}
+.signature{color:#f6e5dc!important}
+.signature b{color:#f3cf83!important;text-shadow:0 1px 2px #39202a!important}
+.cover .signature{color:#70434b!important}
+.cover .signature b{color:#a52f50!important;text-shadow:none!important}
+.eyebrow{color:#f8dfd4}
+h1,h2{color:#fff1e8;text-shadow:0 1px 2px #3c202955}
+.sub{color:#f7e2d9;text-shadow:0 1px 2px #3c202933}
+.tiny{color:#f8e9e2}
+.extra-card,.extra-card *{color:#59313b}
+.note{color:#59313b!important;text-shadow:none}
+.memory p{color:#59313b!important}
+.letter,.letter *{color:#59313b}
+.letter p:first-child,.letter p:last-child{color:#8b3d50!important}
+.voice-note-card,.voice-note-card *{color:#59313b}
+.music-control,.music-control *{color:#713b4a}
+#princessIntro .for-name{color:#ffe2a8;text-shadow:0 2px 4px #42202b}
+#princessIntro .princess-title{color:#fff8f1;text-shadow:0 4px 0 #69404b,0 2px 12px #3c202955}
+/* Small decorative hearts around the opening book page */
+.book-pages:before{content:"♡  ♥  ♡";position:absolute;top:12px;left:18px;right:18px;text-align:center;letter-spacing:18px;font:22px Georgia,serif;color:#bd6475;opacity:.8;pointer-events:none}
+.book-pages:after{background:repeating-linear-gradient(0deg,#d8b9ae 0 2px,#f7eee6 2px 5px)}
+
+
+/* Final tiny refinements requested: cover subtitle + fuller colorful wish tree */
+.cover-top .sub{
+  color:#9a6a22!important;
+  text-shadow:none!important;
+  font-weight:600;
+}
+.tree .trunk,.tree .branch{
+  background:linear-gradient(180deg,#d2a65d,#8eaa7c)!important;
+  box-shadow:0 0 8px #d6b36b55;
+}
+.tree-leaf{filter:drop-shadow(0 2px 3px #5c334522)}
+
+</style>
+</head>
+<body>
+
+<div id="princessIntro">
+ <div class="intro-scene heart-scene">
+  <div class="heart-icon">♥</div><div class="bow">🏹</div>
+  <span class="tiny-heart" style="--dx:-160px;--dy:-150px;--rot:-30deg">♥</span>
+  <span class="tiny-heart" style="--dx:145px;--dy:-160px;--rot:25deg">♥</span>
+  <span class="tiny-heart" style="--dx:-210px;--dy:65px;--rot:40deg">♡</span>
+  <span class="tiny-heart" style="--dx:205px;--dy:85px;--rot:-25deg">♥</span>
+  <span class="tiny-heart" style="--dx:0px;--dy:-210px;--rot:15deg">♡</span>
+  <span class="tiny-heart" style="--dx:-80px;--dy:170px;--rot:-35deg">♥</span>
+  <span class="tiny-heart" style="--dx:100px;--dy:185px;--rot:35deg">♡</span>
+ </div>
+ <div class="intro-scene title-scene">
+  <div class="princess-title">Happiest<br>Princess Day</div>
+  <div class="title-rule"></div><div class="for-name">for Harshita</div>
+ </div>
+ <div class="intro-scene tree-scene">
+  <svg class="heart-tree" viewBox="0 0 520 600" aria-label="A tree made of little hearts">
+   <path class="tree-trunk" d="M260 560 L260 315"/>
+   <path class="tree-branch" d="M260 370 L170 245 M260 350 L350 225 M260 320 L115 190 M260 320 L405 180 M260 390 L95 285 M260 390 L425 270"/>
+   <g fill="#f20a78">
+   <path class="leaf" style="animation-delay:1.1s" d="M164 220 C125 170 90 205 164 267 C238 205 203 170 164 220Z"/>
+   <path class="leaf" style="animation-delay:1.25s" d="M354 205 C315 155 280 190 354 252 C428 190 393 155 354 205Z"/>
+   <path class="leaf" style="animation-delay:1.35s" d="M108 170 C69 120 34 155 108 217 C182 155 147 120 108 170Z"/>
+   <path class="leaf" style="animation-delay:1.45s" d="M410 160 C371 110 336 145 410 207 C484 145 449 110 410 160Z"/>
+   <path class="leaf" style="animation-delay:1.55s" d="M260 130 C221 80 186 115 260 177 C334 115 299 80 260 130Z"/>
+   </g>
+   <g fill="#ff9bc6">
+   <path class="leaf" style="animation-delay:1.65s" d="M205 185 C176 148 150 174 205 220 C260 174 234 148 205 185Z"/>
+   <path class="leaf" style="animation-delay:1.75s" d="M310 180 C281 143 255 169 310 215 C365 169 339 143 310 180Z"/>
+   <path class="leaf" style="animation-delay:1.85s" d="M150 265 C121 228 95 254 150 300 C205 254 179 228 150 265Z"/>
+   <path class="leaf" style="animation-delay:1.95s" d="M370 260 C341 223 315 249 370 295 C425 249 399 223 370 260Z"/>
+   <path class="leaf" style="animation-delay:2.05s" d="M260 220 C231 183 205 209 260 255 C315 209 289 183 260 220Z"/>
+   </g>
+   <g fill="#ffd66e">
+   <path class="leaf" style="animation-delay:2.15s" d="M130 215 C105 183 82 205 130 245 C178 205 155 183 130 215Z"/>
+   <path class="leaf" style="animation-delay:2.25s" d="M390 210 C365 178 342 200 390 240 C438 200 415 178 390 210Z"/>
+   <path class="leaf" style="animation-delay:2.35s" d="M260 80 C235 48 212 70 260 110 C308 70 285 48 260 80Z"/>
+   </g>
+  </svg>
+ </div>
+ <button class="begin-btn" onclick="beginPrincessIntro()">Tap to begin ♡</button>
+</div>
+
+
+<button class="music-control" id="musicButton" type="button" onclick="toggleMusic()" aria-label="Play or pause background music">
+ <span class="music-icon" id="musicIcon">♫</span>
+ <span id="musicLabel">Play song</span>
+ <span class="music-state" id="musicState">♡</span>
+</button>
+<div id="youtubeMusicFrame" aria-hidden="true"></div>
+
+<section class="scene active cover-scene" id="s0">
+ <span class="floaty" style="top:10%;left:12%">✧</span><span class="floaty" style="top:17%;right:12%;animation-delay:1s">♡</span><span class="floaty" style="bottom:12%;left:10%;animation-delay:2s">୨ৎ</span>
+ <div class="cover">
+  <div class="cover-top"><div class="eyebrow">a tiny story made with love</div><div class="cover-title">Harshita’s<br><i>Little Storybook</i></div><div class="sub">a little world, just for you ♡</div></div>
+  <div class="cover-art"><span class="heart">♥</span><span class="floaty" style="top:12px;right:8px">✧</span><span class="floaty" style="bottom:15px;left:9px">♡</span></div>
+  <div class="cover-bottom"><div class="sparkle">✧ ♡ ✧</div><div class="signature">a little surprise by <b>Adarsh</b> ♡</div><button class="btn" onclick="openBook()">open your little book</button><p class="tiny" style="margin:14px 0 0">18 November · Princess Day</p></div>
+ <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+
+<section class="scene" id="s1">
+ <div class="inner">
+  <div class="name-ribbon">just for you <span class="letters"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></span> ♡</div>
+  <div class="eyebrow">chapter one · a special day</div>
+  <div class="book-open" id="book">
+   <div class="book-pages"><div class="book-inside"><div class="eyebrow">for the one and only</div><h2>Harshita,<br><i>this little world is yours.</i></h2><p class="sub">A day for your smile, your sparkle<br>and all the lovely things that make you YOU.</p><div class="sparkle">✧ ♡ ✧</div><button class="btn" onclick="go(2)">turn the page →</button></div><span class="page-number">01</span></div>
+   <div class="book-left"><div class="mini">♡</div><div class="eyebrow" style="margin-top:15px">a story for Harshita</div><p class="tiny">tap to turn the page</p></div>
+  </div>
+  <p class="tiny">A little page-turning magic, made especially for you.</p>
+ <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+
+<section class="scene" id="s2">
+ <div class="inner">
+  <div class="name-ribbon">just for you <span class="letters"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></span> ♡</div>
+  <div class="eyebrow">chapter two · a little celebration</div>
+  <h2>Happiest Princess Dayyy,<br><i>Harshita!</i></h2>
+  <p class="sub">Ready for a tiny balloon surprise?</p>
+  <div class="balloon-stage" id="balloonStage">
+   <button class="balloon" onclick="popName(this,0)" aria-label="Pop balloon"><span>H</span></button>
+   <button class="balloon" onclick="popName(this,1)" aria-label="Pop balloon"><span>AR</span></button>
+   <button class="balloon" onclick="popName(this,2)" aria-label="Pop balloon"><span>SH</span></button>
+   <button class="balloon" onclick="popName(this,3)" aria-label="Pop balloon"><span>ITA</span></button>
+   <button class="balloon" onclick="popName(this,4)" aria-label="Pop balloon"><span>♡</span></button>
+   <button class="balloon" onclick="popName(this,5)" aria-label="Pop balloon"><span>H</span></button>
+   <button class="balloon" onclick="popName(this,6)" aria-label="Pop balloon"><span>♡</span></button>
+   <button class="balloon" onclick="popName(this,7)" aria-label="Pop balloon"><span>H</span></button>
+   <button class="balloon" onclick="popName(this,8)" aria-label="Pop balloon"><span>♡</span></button>
+  </div>
+  <p class="tiny" id="balloonHint">Tap each balloon… there’s a little name surprise inside.</p>
+  <div class="actions"><button class="btn" onclick="celebrate()">little confetti shower ✧</button><button class="btn secondary" onclick="go(3)">next page →</button></div>
+ <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+
+<section class="scene" id="s3">
+ <div class="inner">
+  <div class="name-ribbon">just for you <span class="letters"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></span> ♡</div>
+  <div class="eyebrow">chapter three · make a wish</div>
+  <h2>A wish for<br><i>Harshita.</i></h2>
+  <div class="cake">🎂</div>
+  <p class="sub">Close your eyes for a second,<br>make a wish and tap below.</p>
+  <button class="btn" id="wishBtn" onclick="wish()">I made a wish ♡</button>
+  <p class="tiny" id="wishText" style="min-height:24px;margin-top:15px"></p>
+  <div class="actions"><button class="btn secondary" onclick="go(4)">turn the page →</button></div>
+ <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+
+<section class="scene" id="s4">
+ <div class="inner">
+  <div class="name-ribbon">just for you <span class="letters"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></span> ♡</div>
+  <div class="eyebrow">chapter four · little reminders</div>
+  <h2>Harshita, you are<br><i>one of a kind.</i></h2>
+  <p class="sub">Tap the little hearts to uncover your notes.</p>
+  <div class="note-grid" id="notes">
+   <button class="note" onclick="revealNote(this,0)">♡ tap for a note</button><button class="note" onclick="revealNote(this,1)">♡ tap for a note</button>
+   <button class="note" onclick="revealNote(this,2)">♡ tap for a note</button><button class="note" onclick="revealNote(this,3)">♡ tap for a note</button>
+   <button class="note" onclick="revealNote(this,4)">♡ tap for a note</button><button class="note" onclick="revealNote(this,5)">♡ tap for a note</button>
+  </div>
+  <div class="actions"><button class="btn" onclick="go(5)">a tiny wish tree →</button></div>
+ <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+
+<section class="scene" id="s5">
+ <div class="inner">
+  <div class="name-ribbon">just for you <span class="letters"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></span> ♡</div>
+  <div class="eyebrow">chapter five · may lovely things find you</div>
+  <h2>Keep blooming,<br><i>Harshita.</i></h2>
+  <p class="sub">Tap to grow a little tree of wishes.</p>
+  <div class="tree" id="tree">
+   <div class="trunk"></div><div class="branch l"></div><div class="branch r"></div>
+   <span class="tree-leaf" style="left:23%;top:35%;transition-delay:.9s;color:#d98e9c">♥</span>
+   <span class="tree-leaf" style="left:38%;top:20%;transition-delay:1.2s;color:#c5afd2">♡</span>
+   <span class="tree-leaf" style="left:54%;top:14%;transition-delay:1.5s;color:#e3b4a7">✿</span>
+   <span class="tree-leaf" style="left:69%;top:34%;transition-delay:1.8s;color:#a9c3c6">♡</span>
+   <span class="tree-leaf" style="left:31%;top:52%;transition-delay:2.1s;color:#d9bd83">♥</span>
+   <span class="tree-leaf" style="left:60%;top:53%;transition-delay:2.4s;color:#b6c5a9">✧</span>
+   <span class="tree-leaf" style="left:45%;top:2%;transition-delay:2.7s;color:#d98e9c">♡</span>
+   <span class="tree-leaf" style="left:14%;top:22%;transition-delay:2.9s;color:#f0c76f">✧</span>
+   <span class="tree-leaf" style="left:82%;top:23%;transition-delay:3.05s;color:#a9c8b0">✦</span>
+   <span class="tree-leaf" style="left:18%;top:45%;transition-delay:3.2s;color:#ed9eae">♡</span>
+   <span class="tree-leaf" style="left:76%;top:48%;transition-delay:3.35s;color:#d8b8e5">♥</span>
+   <span class="tree-leaf" style="left:34%;top:9%;transition-delay:3.5s;color:#f0c76f">✦</span>
+   <span class="tree-leaf" style="left:62%;top:7%;transition-delay:3.65s;color:#ed9eae">✧</span>
+   <span class="tree-leaf" style="left:8%;top:36%;transition-delay:3.8s;color:#a9c8b0">♥</span>
+   <span class="tree-leaf" style="left:88%;top:38%;transition-delay:3.95s;color:#f0c76f">♡</span>
+   <span class="tree-leaf" style="left:27%;top:29%;transition-delay:4.1s;color:#d8b8e5">✧</span>
+   <span class="tree-leaf" style="left:72%;top:29%;transition-delay:4.25s;color:#ed9eae">✦</span>
+  </div>
+  <button class="btn" onclick="growTree()">grow my wish tree ♡</button>
+  <p class="tiny" id="treeText" style="min-height:20px;margin-top:12px"></p>
+  <div class="actions"><button class="btn secondary" onclick="go(6)">one more page →</button></div>
+ <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+
+<section class="scene" id="s6">
+ <div class="inner">
+  <div class="name-ribbon">just for you <span class="letters"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></span> ♡</div>
+  <div class="eyebrow">chapter six · little happy things</div>
+  <h2>A pocketful of<br><i>pretty moments.</i></h2>
+  <p class="sub">For Harshita, with extra sprinkles of joy.</p>
+  <div class="memory-row">
+   <div class="memory"><div class="memory-art">🍓</div><p>sweet little joys</p></div>
+   <div class="memory"><div class="memory-art">🌷</div><p>soft sunny days</p></div>
+   <div class="memory"><div class="memory-art">🦢</div><p>lovely surprises</p></div>
+  </div>
+  <div class="note" style="max-width:470px;margin:20px auto">A tiny wish list for Harshita: happy giggles, unexpected kindness, dreams coming true, and memories that feel like sunshine. ♡</div>
+  <div class="actions"><button class="btn" onclick="go(7)">open your letter →</button></div>
+ <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+
+<section class="scene" id="s7">
+ <div class="inner">
+  <div class="name-ribbon">just for you <span class="letters"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></span> ♡</div>
+  <div class="eyebrow">the final chapter · a letter for you</div>
+  <h2>Dear Harshita,<br><i>one last little surprise.</i></h2>
+  <p class="sub">Tap the envelope to open your letter.</p>
+  <div class="envelope" id="envelope" onclick="openLetter()" role="button" aria-label="Open Harshita's letter"><div class="env-back"></div><div class="env-flap"></div><div class="env-front"></div><div class="env-seal">♡</div></div>
+  <button class="btn" onclick="openLetter()">open Harshita’s letter ♡</button>
+  <div class="letter" id="letter">
+   <p style="color:#b66c7d;font-style:italic;font-size:23px">Dear Harshita,</p>
+   <p style="color:#b66c7d">Happiest Princess Dayyy, princess! ♡</p>
+   <p>You have such a beautiful energy and the sweetest little vibe. There's just something so special about the way you are. You're genuinely one of those rare people whose vibe just feels right, and I'm so glad ours matched. Even the silliest little moments feel a bit more fun with you around.</p>
+   <p>I hope life brings you the prettiest surprises, countless happy moments and everything your heart wishes for. May you always have a thousand reasons to smile, laugh a little louder and make the loveliest memories.</p>
+   <p>Keep being your sweet, funny and wonderfully unique self. May your days be sprinkled with little joys, unexpected kindness, pretty sunsets and all the things that make your heart happy. I hope this little surprise reminds you how special you are today.</p>
+   <p>Sending you a pocketful of sunshine, a little extra magic and the biggest Princess Day wishes. 🍓🤍</p>
+   <p style="text-align:right;color:#a96878;font-style:italic">With lots of love,<br>Your bestfriend ♡</p>
+  </div>
+  <div class="actions"><button class="btn" onclick="go(11)">open the extra celebrations ✧</button><button class="btn secondary" onclick="go(0)">read our story again ↺</button></div>
+  <p class="tiny" style="margin-top:24px">made especially for Harshita · ୨ৎ</p>
+ <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+
+<section class="scene" id="s8">
+ <div class="inner">
+  <div class="eyebrow">bonus chapter · a sky full of wishes</div>
+  <h2>For Harshita,<br><i>a little sky of sparkle.</i></h2>
+  <p class="sub">Tap the stars and let your wishes dance.</p>
+  <div id="starField" style="max-width:480px;min-height:210px;margin:20px auto;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:center">
+   <button class="note" onclick="starWish(this)">✧</button><button class="note" onclick="starWish(this)">☆</button><button class="note" onclick="starWish(this)">✦</button><button class="note" onclick="starWish(this)">♡</button>
+   <button class="note" onclick="starWish(this)">✦</button><button class="note" onclick="starWish(this)">✧</button><button class="note" onclick="starWish(this)">☆</button><button class="note" onclick="starWish(this)">♡</button>
+  </div>
+  <p class="tiny" id="starWishText">Every little star has a wish with your name on it, Harshita.</p>
+  <div class="actions"><button class="btn" onclick="go(9)">next surprise →</button></div>
+  <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+<section class="scene" id="s9">
+ <div class="inner">
+  <div class="eyebrow">bonus chapter · a confetti moment</div>
+  <h2>Let's celebrate<br><i>you, Harshita!</i></h2>
+  <p class="sub">A tiny celebration, just because you deserve a happy moment.</p>
+  <div style="font-size:76px;margin:22px 0;animation:cakeBob 2s infinite">🎀</div>
+  <button class="btn" onclick="bigParty()">make it sparkle ✧</button>
+  <p class="tiny" id="partyText" style="min-height:24px;margin-top:15px">A little joy is waiting for you.</p>
+  <div class="actions"><button class="btn secondary" onclick="go(10)">one last surprise →</button></div>
+  <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+<section class="scene" id="s10">
+ <div class="inner">
+  <div class="eyebrow">the sweetest little finale</div>
+  <h2><span class="final-name" id="finalName"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></span><br><i>this one's for you.</i></h2>
+  <p class="sub">Eight letters, one lovely person, and sixteen little chapters made to make you smile.</p>
+  <div style="margin:28px auto;padding:22px 16px;max-width:500px;background:#fff;border:1px solid #efdfdc;box-shadow:0 10px 30px #9a707010">
+   <div class="final-name" aria-label="Harshita"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></div>
+   <div class="sparkle">♡ ✧ 🍓 ✧ ♡</div>
+   <p class="sub" style="margin-bottom:0">Just for you, Harshita.</p>
+  </div>
+  <p class="tiny">May your days be soft, bright, full of laughter and sprinkled with lovely surprises.</p>
+  <div class="actions"><button class="btn" onclick="go(7)">read your letter again ♡</button><button class="btn secondary" onclick="go(11)">more celebrations ✧</button><button class="btn secondary" onclick="go(0)">start from the cover ↺</button></div>
+  <div class="signature">with a little effort and lots of good wishes · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+
+
+<section class="scene" id="s11">
+ <div class="inner">
+  <div class="eyebrow">extra chapter · a garden of joy</div>
+  <div class="big-name-title"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></div>
+  <h2>A little garden<br><i>just for you.</i></h2>
+  <p class="sub">Tap each flower and watch your tiny garden bloom.</p>
+  <div class="extra-card">
+   <div class="flower-garden">
+    <button class="flower" onclick="bloomFlower(this)">🌷</button><button class="flower" onclick="bloomFlower(this)">🌸</button><button class="flower" onclick="bloomFlower(this)">🌼</button><button class="flower" onclick="bloomFlower(this)">🪷</button><button class="flower" onclick="bloomFlower(this)">🌺</button>
+   </div>
+   <p class="tiny" id="flowerText">A flower for every lovely thing about you. ♡</p>
+  </div>
+  <div class="actions"><button class="btn" onclick="go(12)">next little magic →</button></div>
+  <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+<section class="scene" id="s12">
+ <div class="inner">
+  <div class="eyebrow">extra chapter · princess moment</div>
+  <div class="big-name-title"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></div>
+  <h2>Your royal moment<br><i>has arrived.</i></h2>
+  <p class="sub">A crown made of sparkle, smiles and the sweetest wishes.</p>
+  <div class="extra-card">
+   <div class="crown-wrap" id="crown">👑</div>
+   <button class="btn" onclick="crownMagic()">place the crown ✧</button>
+   <p class="tiny" id="crownText">Today, the spotlight is all yours, Princess Harshita.</p>
+  </div>
+  <div class="actions"><button class="btn" onclick="go(13)">keep celebrating →</button></div>
+  <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+<section class="scene" id="s13">
+ <div class="inner">
+  <div class="eyebrow">extra chapter · make a wish</div>
+  <div class="big-name-title"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></div>
+  <h2>Three tiny wishes<br><i>for your day.</i></h2>
+  <p class="sub">Tap the candles one by one and send a little wish into the universe.</p>
+  <div class="extra-card">
+   <div class="candle-row"><button class="candle" onclick="wishCandle(this)">🕯️</button><button class="candle" onclick="wishCandle(this)">🕯️</button><button class="candle" onclick="wishCandle(this)">🕯️</button></div>
+   <p class="tiny" id="candleText">One wish for laughter, one for joy, one for lovely surprises. ♡</p>
+  </div>
+  <div class="actions"><button class="btn" onclick="go(14)">one more celebration →</button></div>
+
+  <div class="voice-note-card">
+   <a class="voice-note-link" href="https://ig.me/m/adarshhh.h_____" target="_blank" rel="noopener noreferrer">Send a voice note to Adarsh ♡</a>
+   <p class="voice-note-copy">Tap here to send Adarsh a voice note as a thank-you for this lovely website. It would make him so happy. 🤍🍓</p>
+  </div>
+  <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+<section class="scene" id="s14">
+ <div class="inner">
+  <div class="eyebrow">extra chapter · a sky of confetti</div>
+  <div class="big-name-title"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></div>
+  <h2>Let the sky<br><i>celebrate you!</i></h2>
+  <p class="sub">A little burst of happiness, made especially for this moment.</p>
+  <div class="firework-zone" id="fireworkZone"><span style="font-size:38px">✧ ♡ ✧</span></div>
+  <button class="btn" onclick="fireworkParty()">start the celebration ✨</button>
+  <p class="tiny" id="fireworkText">Ready for a sky full of sparkle?</p>
+  <div class="actions"><button class="btn" onclick="go(15)">final surprise →</button></div>
+
+  <div class="voice-note-card">
+   <a class="voice-note-link" href="https://ig.me/m/adarshhh.h_____" target="_blank" rel="noopener noreferrer">Send a voice note to Adarsh ♡</a>
+   <p class="voice-note-copy">Tap here to send Adarsh a voice note as a thank-you for this lovely website. It would make him so happy. 🤍🍓</p>
+  </div>
+  <div class="signature">made with care · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+<section class="scene" id="s15">
+ <div class="inner">
+  <div class="eyebrow">the grand little finale · just for you</div>
+  <div class="big-name-title"><span style="--i:0">H</span><span style="--i:1">A</span><span style="--i:2">R</span><span style="--i:3">S</span><span style="--i:4">H</span><span style="--i:5">I</span><span style="--i:6">T</span><span style="--i:7">A</span></div>
+  <h2>Happiest Princess Day<br><i>to the one and only you.</i></h2>
+  <div class="extra-card">
+   <div style="font-size:62px;animation:cakeBob 2.2s infinite">🎀 🍓 🎂</div>
+   <p class="sub" style="margin:15px 0">May your world always be filled with soft days, bright moments and people who make you feel appreciated.</p>
+   <div class="sparkle">♡ ✧ 🌷 ✧ ♡</div>
+   <p class="tiny">A little story, a little celebration, and lots of good wishes.</p>
+  </div>
+  <div class="actions"><button class="btn" onclick="go(0)">start the story again ↺</button><button class="btn secondary" onclick="go(7)">open your letter ♡</button></div>
+
+  <div class="voice-note-card">
+   <a class="voice-note-link" href="https://ig.me/m/adarshhh.h_____" target="_blank" rel="noopener noreferrer">Send a voice note to Adarsh ♡</a>
+   <p class="voice-note-copy">Tap here to send Adarsh a voice note as a thank-you for this lovely website. It would make him so happy. 🤍🍓</p>
+  </div>
+  <div class="signature">with care and good wishes · <b>by Adarsh</b> ♡</div>
+ </div>
+</section>
+
+<footer>HARSHITA’S LITTLE PRINCESS STORYBOOK · 18.11 · MADE BY ADARSH ♡</footer>
+<script>
+
+// YouTube background music: starts only after the visitor taps the music button.
+const musicVideoId = 'b9VKojI3vfo';
+let musicPlayer = null;
+let musicReady = false;
+let musicWantsToPlay = false;
+let musicIsPlaying = false;
+
+function onYouTubeIframeAPIReady(){
+ musicPlayer = new YT.Player('youtubeMusicFrame', {
+  height:'1', width:'1',
+  videoId:musicVideoId,
+  playerVars:{autoplay:0,controls:0,loop:1,playlist:musicVideoId,playsinline:1,rel:0,modestbranding:1},
+  events:{
+   onReady:function(){musicReady=true;if(musicWantsToPlay)startMusic()},
+   onStateChange:function(event){
+    if(event.data===YT.PlayerState.PLAYING){musicIsPlaying=true;updateMusicButton()}
+    if(event.data===YT.PlayerState.PAUSED){musicIsPlaying=false;updateMusicButton()}
+    if(event.data===YT.PlayerState.ENDED){musicPlayer.seekTo(0);musicPlayer.playVideo()}
+   }
+  }
+ });
+}
+(function loadYouTubeAPI(){
+ const tag=document.createElement('script');
+ tag.src='https://www.youtube.com/iframe_api';
+ const first=document.getElementsByTagName('script')[0];
+ first.parentNode.insertBefore(tag,first);
+})();
+function updateMusicButton(){
+ const b=document.getElementById('musicButton');
+ if(!b)return;
+ b.classList.toggle('playing',musicIsPlaying);
+ document.getElementById('musicIcon').textContent=musicIsPlaying?'Ⅱ':'♫';
+ document.getElementById('musicLabel').textContent=musicIsPlaying?'Pause song':'Play song';
+ document.getElementById('musicState').textContent=musicIsPlaying?'NOW PLAYING':'♡';
+}
+function startMusic(){
+ if(!musicReady||!musicPlayer)return;
+ musicPlayer.playVideo();
+}
+function toggleMusic(){
+ if(!musicReady){musicWantsToPlay=true;document.getElementById('musicLabel').textContent='Loading…';return}
+ if(musicIsPlaying){musicPlayer.pauseVideo();return}
+ musicWantsToPlay=true;startMusic();
+}
+
+
+function beginPrincessIntro(){
+ const intro=document.getElementById('princessIntro');
+ if(intro.dataset.started)return;intro.dataset.started='1';
+ intro.classList.add('started');
+ // Start the existing song after the heart bursts; the initial tap authorizes playback.
+ musicWantsToPlay=true;
+ setTimeout(()=>{if(musicReady)startMusic()},1750);
+ setTimeout(()=>{intro.classList.add('burst')},1150);
+ setTimeout(()=>{intro.classList.add('title-on')},2050);
+ setTimeout(()=>{intro.classList.remove('title-on');intro.classList.add('tree-on')},4850);
+ setTimeout(()=>{intro.classList.add('hide')},8800);
+ setTimeout(()=>{intro.remove()},9800);
+}
+
+let current=0;
+function playNameReveal(scene){scene.querySelectorAll('.name-ribbon').forEach(el=>{el.classList.remove('play');void el.offsetWidth;el.classList.add('play')});scene.querySelectorAll('.final-name').forEach(el=>{el.classList.remove('play');void el.offsetWidth;el.classList.add('play')})}
+function go(n){document.getElementById('s'+current).classList.remove('active');current=n;const scene=document.getElementById('s'+n);scene.classList.add('active');playNameReveal(scene);window.scrollTo({top:0,behavior:'smooth'});if(n===1)setTimeout(()=>document.getElementById('book').classList.add('open'),250);if(n===5)document.getElementById('tree').classList.remove('grow')}
+function openBook(){go(1)}
+function confettiAt(x,y,count=24){const bits=['♡','✧','✿','🍓','🤍'];for(let i=0;i<count;i++){const e=document.createElement('span');e.className='confetti';e.textContent=bits[Math.floor(Math.random()*bits.length)];e.style.left=(x+(Math.random()*180-90))+'px';e.style.top=(y-20)+'px';e.style.setProperty('--drift',(Math.random()*240-120)+'px');e.style.animationDelay=(Math.random()*.35)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),3300)}}
+function celebrate(){confettiAt(innerWidth/2,80,38);document.getElementById('balloonHint').textContent='A little celebration, just for Harshita! 🍓🤍'}
+let popped=0;
+function popName(el,i){if(el.classList.contains('popped'))return;el.classList.add('popped');popped++;confettiAt(el.getBoundingClientRect().left+30,el.getBoundingClientRect().top+25,14);document.getElementById('balloonHint').textContent=popped===9?'H A R S H I T A — all these little surprises are for you! ♡':'A tiny surprise for Harshita… '+popped+' of 9 balloons popped!';if(popped===9)celebrate()}
+let wished=false;function wish(){if(wished)return;wished=true;document.getElementById('wishBtn').textContent='wish sent ✧';document.getElementById('wishText').textContent='May this wish find its way to you, Harshita. ♡';confettiAt(innerWidth/2,innerHeight/2,30)}
+const notes=['Harshita, your laugh makes ordinary moments brighter.','Your kind heart is one of your loveliest things.','Your vibe is rare, lovely and completely your own.','You make little moments feel special.','Harshita, never stop being wonderfully YOU.','The world is sweeter with your sparkle in it.'];
+function revealNote(el,i){if(el.dataset.done)return;el.dataset.done='1';el.textContent=notes[i];el.classList.add('show');confettiAt(el.getBoundingClientRect().left+30,el.getBoundingClientRect().top+20,8)}
+function growTree(){document.getElementById('tree').classList.add('grow');document.getElementById('treeText').textContent='A whole tree of good wishes, just for Harshita. 🌷';confettiAt(innerWidth/2,innerHeight/2,18)}
+function openLetter(){document.getElementById('envelope').classList.add('open');setTimeout(()=>{const l=document.getElementById('letter');l.classList.add('show');l.scrollIntoView({behavior:'smooth',block:'center'});confettiAt(innerWidth/2,innerHeight/2,25)},520)}
+
+function starWish(el){if(el.dataset.done)return;el.dataset.done='1';el.textContent='♡';el.style.color='#d47f91';el.classList.add('show');document.getElementById('starWishText').textContent='A wish for Harshita: may something lovely find you today. ♡';confettiAt(el.getBoundingClientRect().left+20,el.getBoundingClientRect().top+20,10)}
+function bigParty(){confettiAt(innerWidth/2,innerHeight/2,65);document.getElementById('partyText').textContent='Hooray, Harshita! This little celebration is all yours! 🍓🤍'}
+
+
+function bloomFlower(el){if(el.classList.contains('bloom'))return;el.classList.add('bloom');el.textContent='💐';document.getElementById('flowerText').textContent='Your little garden is blooming with wishes for you, Harshita. ♡';confettiAt(innerWidth/2,innerHeight/2,12)}
+function crownMagic(){const c=document.getElementById('crown');c.textContent='👑✨';c.style.transform='scale(1.22) rotate(-5deg)';document.getElementById('crownText').textContent='All the sparkle in this little story is yours, Princess! ♡';confettiAt(innerWidth/2,innerHeight/2,32)}
+let candleCount=0;function wishCandle(el){if(el.classList.contains('off'))return;el.classList.add('off');el.textContent='🕯️';candleCount++;document.getElementById('candleText').textContent=candleCount===3?'All three wishes are on their way. May lovely things find you! ♡':'Wish '+candleCount+' sent with a little sparkle. ✧';confettiAt(innerWidth/2,innerHeight/2,10)}
+function fireworkParty(){const zone=document.getElementById('fireworkZone');const symbols=['✧','✦','♡','🌸','🎀','✨'];for(let i=0;i<24;i++){const e=document.createElement('span');e.className='firework';e.textContent=symbols[i%symbols.length];e.style.left=(8+Math.random()*84)+'%';e.style.top=(8+Math.random()*75)+'%';e.style.animationDelay=(Math.random()*.7)+'s';zone.appendChild(e);setTimeout(()=>e.remove(),2300)}document.getElementById('fireworkText').textContent='A sky full of sparkle, just for Harshita! ♡';confettiAt(innerWidth/2,innerHeight/2,42)}
+
+</script>
+</body>
+</html>
